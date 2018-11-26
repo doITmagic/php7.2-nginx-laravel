@@ -4,8 +4,8 @@ MAINTAINER razvan@doitmagic.com
 
 WORKDIR /var/www
 
-ADD code /var/www
-ADD default.conf /etc/nginx/conf.d/default.conf
+
+ADD nginx-setup/default.conf /etc/nginx/conf.d/default.conf
 ADD start.sh /var/www/start.sh
 
 RUN apk add php7.2-mysqli \
@@ -30,7 +30,6 @@ RUN apk add php7.2-mysqli \
             php7.2-curl \
             php7-amqp \
             imagemagick \
-            libmagickwand-dev \
             curl \
             zip \
             unzip \
@@ -40,14 +39,8 @@ RUN apk add php7.2-mysqli \
             sudo \
             git \
             wget && \
-    wget -q https://dl.minio.io/client/mc/release/linux-amd64/mc -O /root/mc  && \
-    chmod +x /root/mc && \
-    ln -s /root/mc /usr/bin/mc && \
-    composer update && \
     sed -i 's/user nginx;/user www-data;/' /etc/nginx/nginx.conf && \
     chown -R www-data:www-data /var/www && \
-    chmod 755 /var/www/storage &&\
-    chmod 755 /var/www/bootstrap/cache && \
     chmod +x /var/www/start.sh && \
     sed -i 's/max_input_time = 60/max_input_time = 10800/' /etc/php/7.2/php.ini && \
     sed -i 's/max_execution_time = 30/max_execution_time = 10800/' /etc/php/7.2/php.ini && \
