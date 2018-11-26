@@ -49,6 +49,7 @@ RUN apk add php7.2-mysqli \
     sed -i 's/memory_limit = 128M/memory_limit = 512M/' /etc/php/7.2/php.ini
 
 COPY nginx-setup/default.conf /etc/nginx/sites-available/default.conf
+COPY certs /etc/nginx/ssl
 # NGINX mountable directories for config and logs
 VOLUME ["/var/www","/etc/nginx/conf.d", "/var/log/nginx","/etc/nginx/ssl"]
 
