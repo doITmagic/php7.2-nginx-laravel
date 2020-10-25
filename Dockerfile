@@ -54,6 +54,6 @@ COPY certs /etc/nginx/ssl
 VOLUME ["/var/www","/etc/nginx/conf.d", "/var/log/nginx","/etc/nginx/ssl"]
 
 
-EXPOSE 80 443
+EXPOSE 80 443 6001
 
 CMD ["./start.sh"]
